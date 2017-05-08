@@ -4,11 +4,16 @@
   "description": "Medium Clone with NodeJS and Angular",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jesus Celemin <jesuscelemin.s@gmail.com> (http://jesuscelemin.com)",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
