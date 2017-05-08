@@ -1,11 +1,14 @@
 {
   "name": "mediumclone",
   "version": "1.0.0",
-  "description": "",
+  "description": "Medium Clone with NodeJS and Angular",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jesus Celemin <jesuscelemin.s@gmail.com> (http://jesuscelemin.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
 }
