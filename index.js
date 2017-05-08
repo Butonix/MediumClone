@@ -1,14 +1,9 @@
 'use strict'
 
-const express = require('express')
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-const app = express()
+const app = require('./app')
 const port = process.env.PORT || 3000
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
 
 mongoose.connect('mongodb://localhost:27017/medium', (err, res) => {
   if (err) {
