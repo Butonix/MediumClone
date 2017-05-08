@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 
 const app = require('./app')
 const port = process.env.PORT || 3000
