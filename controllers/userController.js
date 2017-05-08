@@ -2,6 +2,7 @@
 
 const bcrypt = require('bcrypt-nodejs')
 const User = require('../models/User')
+const service = require('../services')
 
 function test (req, res) {
   res.status(200).send({
@@ -30,8 +31,7 @@ function signup(req, res) {
           // Guardamos el usuario
           user.save((err, userStored) => {
             if(err){
-              // res.status(500).send({ msg: 'Error al guardar el usuario'})
-              console.log(err)
+              res.status(500).send({ msg: 'Error al guardar el usuario'})
             }else{
               res.status(200).send({ user: userStored})
             }
@@ -65,6 +65,10 @@ function signin(req, res) {
             // Devolvemos los datos del usuario registrado
             if(params.gethash){
               // Devolvemos un token de jwt
+              res.status(200).send({
+                message: 'Te has logueado correctamente',
+                token: service.createToken(user)
+              })
             }else{
               res.status(200).send({user})
             }
