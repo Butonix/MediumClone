@@ -15,6 +15,7 @@ api.post('/register', UserController.signup)
 api.post('/login', UserController.signin)
 api.put('/update-user/:id', auth.isAuth, UserController.updateUser)
 api.post('/upload-avatar/:id', [auth.isAuth, upload], UserController.uploadImage)
+api.get('/get-avatar/:image', UserController.getImage)
 
 module.exports = api
 

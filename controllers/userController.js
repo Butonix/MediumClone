@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs')
+const path = require('path')
 const bcrypt = require('bcrypt-nodejs')
 const User = require('../models/User')
 const service = require('../services')
@@ -121,10 +123,23 @@ function uploadImage(req, res) {
     }else{
       res.status(200).send({ msg: 'Extensión de archivo no válida'})
     }
-    
+
   }else{
     res.status(200).send({ msg: 'No has subido ninguna imagen' })
   }
+}
+
+function getImage(req, res) {
+  let image = req.params.image
+  let path_file = './uploads/users/'+image
+
+  fs.exists(path_file, (exists) => {
+    if(exists){
+      res.sendFile(path.resolve(path_file))
+    }else{
+      res.status(200).send({ msg: 'No existe la imagen...'})
+    }
+  })
 }
 
 module.exports = {
@@ -132,5 +147,6 @@ module.exports = {
   signup,
   signin,
   updateUser,
-  uploadImage
+  uploadImage,
+  getImage
 }
