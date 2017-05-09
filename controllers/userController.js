@@ -81,8 +81,56 @@ function signin(req, res) {
   })
 }
 
+function updateUser(req, res) {
+  let userId = req.params.id
+  let update = req.body
+
+  User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+    if(err) {
+      res.status(500).send({ msg: 'Error al actualizar el usuario' })
+    }else{
+      if(!userUpdated) {
+        res.status(404).send({ msg: 'No se ha podido actualizar el usuario' })
+      }else{
+        res.status(200).send({ user: userUpdated })
+      }
+    }
+  })
+}
+
+function uploadImage(req, res) {
+  let userId = req.params.id
+  let file_name = "No subido..."
+
+  if(req.files) {
+    let file_path = req.files.image.path
+    let file_split = file_path.split('\/')
+    let file_name = file_split[2]
+
+    let ext_split = file_name.split('\.')
+    let file_ext = ext_split[1]
+
+    if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif') {
+      User.findByIdAndUpdate(userId, {image: file_name}, (err, userUpdated) => {
+        if(!userUpdated){
+          res.status(404).send({ msg: 'No se ha podido actualizar el usuario' })
+        }else{
+          res.status(200).send({ user: userUpdated })
+        }
+      })
+    }else{
+      res.status(200).send({ msg: 'Extensión de archivo no válida'})
+    }
+    
+  }else{
+    res.status(200).send({ msg: 'No has subido ninguna imagen' })
+  }
+}
+
 module.exports = {
   test,
   signup,
-  signin
+  signin,
+  updateUser,
+  uploadImage
 }
